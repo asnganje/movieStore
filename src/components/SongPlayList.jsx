@@ -1,20 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
 import { createRandomSong } from "../data";
+import { addSong, removeSong } from "../store/slices/songSlice";
 
 const SongPlayList = () => {
-    const songs = ['black', 'red']
+    const dispatch = useDispatch()
+    const {data} = useSelector((store)=>store.songs) 
     const songAddHandler = (song) => {
-       
+       dispatch(addSong(song))
     }
 
     const handleRemoveSong = (song)=> {
-
+        dispatch(removeSong(song))
     }
 
-    const renderedSongs = songs.map((song)=> {
+    const renderedSongs = data.map((song)=> {
         return(
-            <li key={song} className="text-white">
+            <li key={song} className="text-white p-1 border flex justify-between">
                 {song}
-                <button onClick={handleRemoveSong}>
+                <button className="text-white hover:text-red-400 text-2xl" onClick={()=>handleRemoveSong(song)}>
                     X
                 </button>
             </li>
@@ -25,9 +28,9 @@ const SongPlayList = () => {
         <div>
             <div className="flex space-x-4">
                 <h2 className="mt-3 text-white text-3xl">Songs Playlist</h2>
-                <button className="bg-blue-500 text-xl p-3 text-white rounded-md">+Add song to playlist</button>
+                <button onClick={()=>songAddHandler(createRandomSong())} className="bg-blue-500 text-xl p-3 text-white rounded-md">+Add song to playlist</button>
             </div>
-        <ul>
+        <ul className="mt-2">
             {renderedSongs}
         </ul>
         </div>

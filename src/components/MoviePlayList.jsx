@@ -1,20 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
 import { createRandomMovie } from "../data";
+import { addMovie, removeMovie} from "../store/slices/movieSlice";
 
 const MoviePlayList = () => {
-    const movies = ['black', 'red']
+    const dispatch = useDispatch()
+    const {data} = useSelector((state)=>state.movies)
+
     const movieAddHandler = (movie) => {
-       
+       dispatch(addMovie(movie))
     }
 
     const handleRemoveMovie = (movie)=> {
-
+        dispatch(removeMovie(movie))
     }
 
-    const renderedMovies = movies.map((movie)=> {
+    const renderedMovies = data.map((movie)=> {
         return(
-            <li key={movie} className="text-white">
+            <li key={movie} className="flex justify-between text-white p-1 border">
                 {movie}
-                <button onClick={handleRemoveMovie}>
+                <button className="text-white hover:text-red-400 text-2xl"  onClick={()=>handleRemoveMovie(movie)}>
                     X
                 </button>
             </li>
@@ -27,7 +31,7 @@ const MoviePlayList = () => {
                 <h2 className="mt-3 text-white text-3xl">Movie Playlist</h2>
                 <button onClick={()=>movieAddHandler( createRandomMovie())}  className="bg-blue-500 text-xl p-3 text-white rounded-md">+Add movie to playlist</button>
             </div>
-            <ul>
+            <ul className="mt-2">
                 {renderedMovies}
             </ul>
         </div>
