@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const movieSlice = createSlice({
     name: 'movies',
-    initialState: {data: []},
+    initialState: [],
     reducers: {
         addMovie(state,action){
-            state.data.push(action.payload) 
+            state.push(action.payload) 
         },
-        updateMovie(){},
         removeMovie(state,action){
-            state.data = state.data.filter((el)=>el !== action.payload)
+            state = state.filter((el)=>el !== action.payload)
+            return state
         },
-        resetM(state) {
-            state.data = []
+        reset(state) {
+            return []
         }
     }
 })
 
 export const moviesReducer = movieSlice.reducer;
-export const {addMovie, updateMovie, resetM, removeMovie} = movieSlice.actions;
+export const {addMovie, updateMovie, reset, removeMovie} = movieSlice.actions;

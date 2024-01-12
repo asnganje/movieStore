@@ -4,7 +4,7 @@ import { addMovie, removeMovie} from "../store/slices/movieSlice";
 
 const MoviePlayList = () => {
     const dispatch = useDispatch()
-    const {data} = useSelector((state)=>state.movies)
+    const data = useSelector((state)=>state.movies)
 
     const movieAddHandler = (movie) => {
        dispatch(addMovie(movie))
@@ -16,9 +16,9 @@ const MoviePlayList = () => {
 
     const renderedMovies = data.map((movie)=> {
         return(
-            <li key={movie} className="flex justify-between text-white p-1 border">
+            <li key={movie} className="flex italic justify-between text-white p-1 border">
                 {movie}
-                <button className="text-white hover:text-red-400 text-2xl"  onClick={()=>handleRemoveMovie(movie)}>
+                <button className="text-white bg-red-600 p-1 w-10 hover:text-red-400 text-2xl"  onClick={()=>handleRemoveMovie(movie)}>
                     X
                 </button>
             </li>

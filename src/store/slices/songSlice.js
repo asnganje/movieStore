@@ -2,17 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const songSlice = createSlice({
     name: 'songs',
-    initialState: {data: []},
+    initialState: [],
     reducers: {
         addSong(state,action){
-            state.data.push(action.payload)
+            state.push(action.payload)
         },
         removeSong(state, action){
-            state.data = state.data.filter((el)=>el !== action.payload)
+            state = state.filter((el)=>el !== action.payload)
+            return state
         },
-        resetS(state) {
-            state.data = []
-        }
+    },
+    extraReducers(builder){
+        builder.addCase('movies/reset', (state,action)=> {
+            return []
+        })
     }
 })
 

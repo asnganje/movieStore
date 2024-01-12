@@ -4,7 +4,7 @@ import { addSong, removeSong } from "../store/slices/songSlice";
 
 const SongPlayList = () => {
     const dispatch = useDispatch()
-    const {data} = useSelector((store)=>store.songs) 
+    const data = useSelector((store)=>store.songs) 
     const songAddHandler = (song) => {
        dispatch(addSong(song))
     }
@@ -15,9 +15,9 @@ const SongPlayList = () => {
 
     const renderedSongs = data.map((song)=> {
         return(
-            <li key={song} className="text-white p-1 border flex justify-between">
+            <li key={song} className="text-white italic p-1 border flex justify-between">
                 {song}
-                <button className="text-white hover:text-red-400 text-2xl" onClick={()=>handleRemoveSong(song)}>
+                <button className="text-white  bg-red-600 p-1 w-10 hover:text-red-400 text-2xl" onClick={()=>handleRemoveSong(song)}>
                     X
                 </button>
             </li>
